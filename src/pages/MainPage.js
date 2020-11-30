@@ -26,36 +26,40 @@ export default function MainPage() {
   return (
     <div className="MainPage">
       <div className="PostContainer">
-        {postList.map((val, key) => {
-          return (
-            <div
-              className="Post"
-              key={key}
-              onClick={() => {
-                // history.push(`/post/${val.id}`);
-              }}
-            >
-              <h1>{val.title}</h1>
-              <p>
-                {val.post_text.length > 500
-                  ? val.post_text.substring(0, 500) + " ..."
-                  : val.post_text}
-              </p>
-
-              <button
+        {postList == [] ? (
+          <h1>Loading...</h1>
+        ) : (
+          postList.map((val, key) => {
+            return (
+              <div
+                className="Post"
+                key={key}
                 onClick={() => {
-                  likePost(val.id);
+                  // history.push(`/post/${val.id}`);
                 }}
               >
-                Like
-              </button>
-              <div className="bottom">
-                <h4> {val.user_name} </h4>
-                <h4> {val.likes}</h4>
+                <h1>{val.title}</h1>
+                <p>
+                  {val.post_text.length > 500
+                    ? val.post_text.substring(0, 500) + " ..."
+                    : val.post_text}
+                </p>
+
+                <button
+                  onClick={() => {
+                    likePost(val.id);
+                  }}
+                >
+                  Like
+                </button>
+                <div className="bottom">
+                  <h4> {val.user_name} </h4>
+                  <h4> {val.likes}</h4>
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })
+        )}
       </div>
     </div>
   );
